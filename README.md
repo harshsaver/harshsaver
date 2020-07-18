@@ -1,7 +1,7 @@
 ### Hi there 👋
 
-- 🔭 I’m currently working on super secret stuff
-- 📫 How to reach me: harsh@inator.in
+![Harsh's github stats](https://harsh.software)
+
 <!--
 **harshsaver/harshsaver** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
