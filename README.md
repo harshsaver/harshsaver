@@ -1,4 +1,4 @@
-![Harsh here](https://github.com/harshsaver/harshsaver/images/cover.png)
+![Harsh here](https://github.com/harshsaver/harshsaver/blob/master/images/cover.png)
 
 ### Hi there 👋
 
