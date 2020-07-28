@@ -1,3 +1,5 @@
+[![Harsh has a lot of ideas.](http://harsh.software/covers/one.png)](https://www.harsh.software)
+
 ### Hi there 👋
 
 - 🔭 I’m currently working on some top secret stuff. Check back later for details!
