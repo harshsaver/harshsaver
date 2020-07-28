@@ -2,6 +2,10 @@
 
 ![Harsh]((https://harsh.software/covers/one.png)
 
+[![Jason Lengstorf has a lot of ideas.](https://harsh.software/covers/one.png)](https://www.jason.af)
+
+![GitHub Logo](/images/cover.png)
+
 ### Hi there 👋
 
 - 🔭 I’m currently working on some top secret stuff. Check back later for details!
