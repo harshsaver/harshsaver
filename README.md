@@ -4,6 +4,7 @@
 
 - 🔭 I’m currently working on some top secret stuff. Check back later for details!
 - 📫 How to reach me: harsh@inator.in
+- ⚡ Fun fact: 
 
 <!--
 **harshsaver/harshsaver** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
