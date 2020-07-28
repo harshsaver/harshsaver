@@ -1,4 +1,4 @@
-[![Harsh has a lot of ideas.](http://harsh.software/covers/one.png)](https://www.harsh.software)
+[![Harsh has a lot of ideas.](https://harsh.software/covers/one.png)](https://www.harsh.software)
 
 ### Hi there 👋
 
