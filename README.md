@@ -5,7 +5,7 @@
 
 ### Hi there 👋
 
-- 🔭 I’m currently working on some top secret stuff. Check back later for details!
+- 🔭 Looking to connect with developers from all over the globe and building a strong network! 🌍
 - 📫 How to reach me: harsh@inator.in
 
 ### Software profile:
