@@ -5,10 +5,11 @@
 
 ### Hi there 👋
 
-- 🔭 Looking to connect with developers from all over the globe and building a strong network! 🌍
-- 📫 How to reach me: harsh@inator.in
+- 🔭 I am the Founder of Wega Labs, a Web3 gaming studio. We are building fun, gameplay first strategy games for the 🌍
+- 📫 Reach out: harsh@wegalabs.com
 
 [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/harshsaver/)](https://www.linkedin.com/in/harshsaver/)
+[![Twitter Badge](https://img.shields.io/badge/-Twitter-blue?style=flat-square&logo=Twitter&logoColor=white&link=https://www.twitter.com/harshsaver/)](https://www.twitter.com/harshsaver/)
 [![Instagram Badge](https://img.shields.io/badge/-Instagram-BF008C?style=flat-square&logo=Instagram&logoColor=white&link=https://www.instagram.com/harshsavergaonkar/)](https://www.instagram.com/harshsavergaonkar/)
 
 <p align="center">
