@@ -1,5 +1,5 @@
 ![Harsh here](https://github.com/harshsaver/harshsaver/blob/master/images/cover.png)
-
+<!--
 ![](https://visitor-badge.laobi.icu/badge?page_id=harshsaver.harshsaver)
 [![Github](https://img.shields.io/github/followers/CharalambosIoannou?label=Follow&style=social)](https://github.com/harshsaver)
 
@@ -19,7 +19,7 @@
 <a href="https://instagram.com/harshsavergaonkar" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/instagram.svg" alt="harshsavergaonkar" height="30" width="30" /></a>
 </p>
 
-<!--
+
 **harshsaver/harshsaver** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
 Here are some ideas to get you started:
