@@ -1,5 +1,7 @@
-![Harsh here](https://github.com/harshsaver/harshsaver/blob/master/images/cover.png)
-<!--
+![](https://visitor-badge.laobi.icu/badge?page_id=harshsaver.harshsaver)
+[![Github](https://img.shields.io/github/followers/CharalambosIoannou?label=Follow&style=social)](https://github.com/harshsaver)
+<!--![Harsh here](https://github.com/harshsaver/harshsaver/blob/master/images/cover.png)
+
 ![](https://visitor-badge.laobi.icu/badge?page_id=harshsaver.harshsaver)
 [![Github](https://img.shields.io/github/followers/CharalambosIoannou?label=Follow&style=social)](https://github.com/harshsaver)
 
