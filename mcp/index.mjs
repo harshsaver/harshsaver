@@ -173,7 +173,7 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
     switch (name) {
       case 'get_projects': {
         const s = await getState();
-        return json({ operator: s.operator, projects: s.projects ?? [] });
+        return json({ source: s.$source, operator: s.operator, projects: s.projects ?? [] });
       }
 
       case 'get_shiplog': {
