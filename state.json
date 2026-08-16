@@ -1,0 +1,151 @@
+{
+  "$comment": "Operational state for github.com/harshsaver. Agents on the October Bus write to this file; scripts/render.mjs turns it into the artwork. Humans should not hand-edit the trace.",
+  "operation": "operation.profile",
+  "updated": "2026-08-17T09:41:00Z",
+  "operator": {
+    "name": "Harsh Savergaonkar",
+    "handle": "harshsaver",
+    "role": "operator",
+    "location": "India",
+    "org": "Wega Labs",
+    "product": "October"
+  },
+  "agents": [
+    {
+      "id": "apollo",
+      "name": "Apollo",
+      "harness": "Claude Code",
+      "machine": "your laptop",
+      "status": "building",
+      "state": "active"
+    },
+    {
+      "id": "atlas",
+      "name": "Atlas",
+      "harness": "Codex",
+      "machine": "hetzner",
+      "status": "reviewing",
+      "state": "active"
+    }
+  ],
+  "trace": [
+    {
+      "actor": "apollo",
+      "kind": "detect",
+      "text": "task#412 · release detected — filenav@1.4.0",
+      "sub": "delegate → atlas"
+    },
+    {
+      "actor": "apollo",
+      "kind": "message",
+      "text": "drafted entry “1.4.0 — natural-language rules”",
+      "sub": "blocked on: atlas"
+    },
+    {
+      "actor": "atlas",
+      "kind": "reject",
+      "text": "rejected — “2.1k installs” is unverified",
+      "sub": "escalate ▲ operator"
+    },
+    {
+      "actor": "harsh",
+      "kind": "verdict",
+      "text": "edit — drop the number, keep the release",
+      "sub": "2 bits emitted · 4m ago"
+    },
+    {
+      "actor": "apollo",
+      "kind": "commit",
+      "text": "committed README.md · operation.profile current",
+      "sub": "3m ago"
+    }
+  ],
+  "message": {
+    "from": "Apollo",
+    "to": "Atlas",
+    "body": "filenav@1.4.0 shipped. Draft the entry, verify every number before it lands.",
+    "meta": "context attached · delivered"
+  },
+  "ledger": {
+    "window": "this week",
+    "verdicts": ["approve", "edit", "reject"],
+    "bitsPerVerdict": 2,
+    "vocabulary": 4,
+    "note": "Every adjudication is one selection among {approve, edit, reject, defer}. log2(4) = 2 bits, exactly."
+  },
+  "card": {
+    "protocol": "A2A v1.0",
+    "endpoint": "https://harshsaver.github.io/.well-known/agent-card.json",
+    "mcp": "npx -y @harshsaver/mcp",
+    "skills": [
+      { "name": "get_projects", "desc": "what is shipped, what is live, what is dead" },
+      { "name": "get_shiplog", "desc": "releases and commits across every repo" },
+      { "name": "get_ledger", "desc": "operator bits emitted, selections, window" },
+      { "name": "ask_harsh", "desc": "queue a question — answered as a public transcript" },
+      { "name": "request_intro", "desc": "open a scoped introduction request" }
+    ]
+  },
+  "projects": {
+    "$comment": "Carried over from the previous hand-written README, which is the operator's own record of what he shipped. 'status' is what he has confirmed: 'shipped' means released, not that it is currently live. Agents must not upgrade a status they cannot verify, and must not add a project the operator has not listed.",
+    "flagship": [
+      { "name": "October", "what": "Infrastructure for supervised AI collaboration. 17 agent harnesses in one workspace.", "url": "https://october.dev", "status": "shipping" },
+      { "name": "Wega AI", "what": "Transform your workflow with AI-powered tools and intelligent automation.", "url": "https://www.wega.ai", "status": "shipped" },
+      { "name": "Saturday", "what": "Run coding tasks on GitHub repos remotely via Telegram or WhatsApp.", "url": "https://saturday.dev", "status": "shipped" },
+      { "name": "FileNav", "what": "AI file manager with natural-language commands for macOS Finder.", "url": "https://filenav.ai", "status": "shipped" },
+      { "name": "Reelpost", "what": "Social media content with AI-powered suggestions.", "url": "https://reelpost.app", "status": "shipped" }
+    ],
+    "snacks": [
+      { "name": "Concurred", "what": "Group decisions via AI-powered consensus.", "url": "https://concurred.ai", "status": "shipped" },
+      { "name": "FitCheck", "what": "Instant AI feedback on your outfits.", "url": "https://apps.apple.com/us/app/fitcheck-personal-ai-stylist/id6738919443", "status": "shipped" },
+      { "name": "HealthAsk", "what": "Personal AI health assistant.", "url": "https://testflight.apple.com/join/8yzQYasw", "status": "testflight" },
+      { "name": "GrindStreak", "what": "Fitness tracking with AI insights.", "url": "https://grindstreak.com", "status": "shipped" },
+      { "name": "RizzText", "what": "AI-powered conversation starters.", "url": "https://apps.apple.com/us/app/rizztext-ai-text-assistant/id6738040254", "status": "shipped" },
+      { "name": "CozyWriter", "what": "AI writing partner for stories and journals.", "url": "https://cozywriter.ai", "status": "shipped" },
+      { "name": "WorkFriend", "what": "AI career companion.", "url": "https://apps.apple.com/us/app/workfriend-ai-ace-work-talk/id6738499890", "status": "shipped" },
+      { "name": "Contrl", "what": "Smart spending control.", "url": "https://apps.apple.com/us/app/contrl-quit-overspending-now/id6753282914", "status": "shipped" },
+      { "name": "HausScout", "what": "Smart home finder.", "url": "https://www.hausscout.com", "status": "shipped" },
+      { "name": "AskMyFiles", "what": "Chat with your documents.", "url": "https://www.askmyfiles.com", "status": "shipped" },
+      { "name": "MakeGamesAI", "what": "Games from concept to prototype with AI.", "url": "https://www.makegamesai.com", "status": "shipped" },
+      { "name": "MakeWebsitesAI", "what": "Build websites in minutes.", "url": "https://www.makewebsitesai.com", "status": "shipped" },
+      { "name": "MinerSocial", "what": "Social-first mining rewards network.", "url": "https://www.minersocial.com", "status": "shipped" }
+    ],
+    "games": [
+      { "name": "WCPL", "what": "World Cricket Premier League — sports strategy.", "url": "https://play.google.com/store/apps/details?id=com.wegalabs.cricktap", "status": "shipped" },
+      { "name": "Cricket Clash", "what": "Strategic cricket card battles.", "url": "https://apps.apple.com/us/app/cricket-clash-elite-champions/id1663784604", "status": "shipped" },
+      { "name": "Battle of Asgard", "what": "Norse mythology game.", "status": "unreleased" },
+      { "name": "My Town", "what": "City building simulation.", "status": "unreleased" }
+    ],
+    "benched": {
+      "$comment": "Fully functional, not launched. Do not describe these as live.",
+      "items": [
+        { "name": "Vroom AI", "what": "Instant AI insights about any car." },
+        { "name": "ExpenseGPT", "what": "Expense tracking and financial insights." },
+        { "name": "Kbeauty", "what": "Personalized K-beauty routines." },
+        { "name": "Talking Fox", "what": "AI companion." },
+        { "name": "AstroAura", "what": "AI astrology companion." },
+        { "name": "InteriorGPT", "what": "AI interior design assistant." },
+        { "name": "TrendMill", "what": "Trend analysis platform.", "url": "https://trendmill.xyz" }
+      ]
+    },
+    "research": [
+      { "name": "Wega Labs", "what": "Interfaces for controlling software without speaking, typing, or moving. The model proposes; the person selects.", "url": "https://www.wegalabs.com", "status": "active research" },
+      { "name": "December", "what": "Persistent artificial agents in a causal world.", "url": "https://www.wegalabs.com/december", "status": "archived" }
+    ],
+    "journey": [
+      { "org": "October", "when": "current", "what": "Founder and CEO. Infrastructure for supervised AI collaboration." },
+      { "org": "Cricinshots", "when": "previous", "what": "Gaming company; award-winning cricket games." },
+      { "org": "Inator", "when": "previous", "what": "Software services company." }
+    ],
+    "connect": {
+      "twitter": "https://twitter.com/harshsaver",
+      "linkedin": "https://linkedin.com/in/harshsaver",
+      "email": "harsh@wegalabs.com",
+      "portfolio": "https://wegalabs.com"
+    }
+  },
+
+  "footer": {
+    "left": "17 harnesses · one workspace",
+    "right": "october.dev"
+  }
+}

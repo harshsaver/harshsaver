@@ -1,0 +1,16 @@
+{
+  "name": "harshsaver-profile",
+  "private": true,
+  "type": "module",
+  "description": "operation.profile — a GitHub profile maintained by agents on the October Bus.",
+  "scripts": {
+    "render": "node scripts/render.mjs",
+    "shiplog": "node scripts/shiplog.mjs",
+    "operate": "npm run projects && npm run shiplog && npm run render",
+    "preview": "npm run render && python3 -m http.server 8899",
+    "projects": "node scripts/projects.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="Supervision ledger — 6 bits emitted this week">
+
+  
+  <defs>
+    <filter id="grain-led-light" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.045 0"/>
+    </filter>
+    <radialGradient id="glow-led-light" cx="12%" cy="8%" r="55%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <rect x="0" y="0" width="1200" height="440" fill="#f3f0e8"/>
+  <rect x="0" y="0" width="1200" height="440" fill="url(#glow-led-light)"/>
+  <rect x="0" y="0" width="1200" height="440" filter="url(#grain-led-light)" opacity="0.9"/>
+  
+  <circle cx="44" cy="52" r="4" fill="#367951">
+     <animate attributeName="opacity" values="1;.3;1" dur="2.4s"
+              begin="0s" repeatCount="indefinite"/>
+   </circle>
+  <text x="62" y="57" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#554e45" letter-spacing=".06em">supervision.ledger</text>
+  <text x="1160" y="57" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#746c61" text-anchor="end" letter-spacing=".06em">this week</text>
+  <line x1="40" y1="82" x2="1160" y2="82" stroke="#dcd4c5"/>
+  
+  <rect x="40" y="108" width="24" height="24" fill="none" stroke="#bfb5a2" rx="4"/>
+  <text x="52" y="125" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#554e45" text-anchor="middle" letter-spacing=".04em">III</text>
+  <text x="76" y="125" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#554e45" letter-spacing=".13em">WHAT THE OPERATOR SPENT</text>
+
+  <g>
+    <text x="40" y="196" font-family="Libre Caslon Text, Georgia, 'Times New Roman', serif" font-size="34" fill="#181511">The agents proposed. The operator selected.</text>
+  </g>
+
+  <g>
+    <rect x="40" y="250" width="18" height="18" fill="#b8460d" stroke="#b8460d" rx="3" opacity="1"/><animate attributeName="opacity" values="0;1" begin="0.60s" dur=".3s" fill="freeze"/><rect x="66" y="250" width="18" height="18" fill="#b8460d" stroke="#b8460d" rx="3" opacity="1"/><animate attributeName="opacity" values="0;1" begin="0.66s" dur=".3s" fill="freeze"/><rect x="92" y="250" width="18" height="18" fill="#b8460d" stroke="#b8460d" rx="3" opacity="1"/><animate attributeName="opacity" values="0;1" begin="0.72s" dur=".3s" fill="freeze"/><rect x="118" y="250" width="18" height="18" fill="#b8460d" stroke="#b8460d" rx="3" opacity="1"/><animate attributeName="opacity" values="0;1" begin="0.78s" dur=".3s" fill="freeze"/><rect x="144" y="250" width="18" height="18" fill="#b8460d" stroke="#b8460d" rx="3" opacity="1"/><animate attributeName="opacity" values="0;1" begin="0.84s" dur=".3s" fill="freeze"/><rect x="170" y="250" width="18" height="18" fill="#b8460d" stroke="#b8460d" rx="3" opacity="1"/><animate attributeName="opacity" values="0;1" begin="0.90s" dur=".3s" fill="freeze"/><rect x="196" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="222" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="248" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="274" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="300" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="326" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="352" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="378" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="404" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="430" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="456" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="482" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="508" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="534" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="560" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="586" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="612" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/><rect x="638" y="250" width="18" height="18" fill="none" stroke="#bfb5a2" rx="3" opacity="0.5"/>
+    <text x="40" y="300" font-family="'IBM Plex Sans', ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, sans-serif" font-size="15" fill="#b8460d" font-weight="600" letter-spacing=".02em">6 bits emitted</text>
+    <text x="40" y="326" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#554e45">3 adjudications · one selection among {approve, edit, reject, defer} · log₂(4) = 2 bits each</text>
+    <text x="40" y="348" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#746c61">4^3 = 64 reachable outcomes · a sentence carries ~50 bits</text>
+  </g>
+
+  <line x1="760" y1="150" x2="760" y2="372" stroke="#dcd4c5"/>
+  <g>
+    <text x="800" y="196" font-family="Libre Caslon Text, Georgia, 'Times New Roman', serif" font-size="22" fill="#554e45" font-style="italic">Selection is not authoring.</text>
+    <text x="800" y="240" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#554e45">A deliberate signal carries one or two</text>
+    <text x="800" y="262" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#554e45">bits per second. A sentence carries fifty.</text>
+    <text x="800" y="292" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#554e45">So the model proposes options,</text>
+    <text x="800" y="314" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#554e45">and the person selects among them.</text>
+    <text x="800" y="348" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d" letter-spacing=".08em">wegalabs.com — interface research</text>
+  </g>
+
+  
+  <line x1="40" y1="392" x2="1160" y2="392" stroke="#dcd4c5"/>
+  <text x="40" y="418" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#746c61" letter-spacing=".1em">october is the first testbed</text>
+  <text x="1160" y="418" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d" text-anchor="end" letter-spacing=".1em">wegalabs.com</text>
+</svg>

@@ -1,0 +1,37 @@
+{
+  "name": "@harshsaver/mcp",
+  "version": "1.0.0",
+  "description": "Harsh Savergaonkar as a connectable peer — projects, ship log, and the supervision ledger, over MCP.",
+  "type": "module",
+  "bin": {
+    "harshsaver-mcp": "./index.mjs"
+  },
+  "main": "./index.mjs",
+  "files": [
+    "index.mjs",
+    "state.snapshot.json",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/harshsaver/harshsaver",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshsaver/harshsaver.git"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "a2a",
+    "agent",
+    "october"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "scripts": {
+    "prepublishOnly": "cp ../state.json ./state.snapshot.json"
+  }
+}

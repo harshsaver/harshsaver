@@ -1,2 +1,5 @@
 # Reference folder - external inspiration
 reference/
+
+node_modules/
+.DS_Store
