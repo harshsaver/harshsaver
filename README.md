@@ -113,12 +113,12 @@ npx -y @harshsaver/mcp
 
 | | | |
 |---|---|---|
+| `2026-08-16` | **harshsaver** | Rebuild the profile as a live October operation |
 | `2026-08-16` | **october-harness** | keep seed models on empty /models and isolate bus register |
 | `2026-08-15` | **october-desktop-releases** | `v1.0.42` released |
 | `2026-08-15` | **october-harness** | document the desktop GET-pull hook contract |
 | `2026-08-14` | **october-harness** | zero-config October inference auth via the app's Supabase session |
 | `2026-08-11` | **october-desktop-releases** | `v1.0.41` released |
-| `2026-08-06` | **october-desktop-releases** | `v1.0.40` released |
 
 <!-- SHIPLOG:END -->
 
