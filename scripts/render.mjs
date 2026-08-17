@@ -2,9 +2,13 @@
 /**
  * Renders github.com/harshsaver from state.json.
  *
- * The agents on the October Bus write state.json. This turns it into artwork.
- * Nothing here is hand-drawn twice — light and dark come out of the same code,
- * so the two themes can never drift apart.
+ * The look is copied from October Desktop itself, not the marketing site:
+ * values come from src/renderer/src/styles.css, TerminalNode.tsx, CanvasView.tsx
+ * and TopNav.tsx. Dark is the app's default, so dark is the default here.
+ *
+ * Animation may only ever ADD motion to something already visible. An earlier
+ * pass gated whole groups behind SMIL and any renderer that skipped it got a
+ * blank rectangle.
  *
  *   node scripts/render.mjs
  */
@@ -16,351 +20,360 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const state = JSON.parse(readFileSync(join(root, 'state.json'), 'utf8'));
 
-/* ── October's design tokens, lifted from OctoberLandingPage.css ─────────── */
+/* ── tokens, verbatim from october-desktop/src/renderer/src/styles.css ────── */
 
 const THEMES = {
-  light: {
-    bg: '#f3f0e8', surface: '#faf8f3', recessed: '#e9e4d9',
-    ink: '#181511', muted: '#554e45', faint: '#746c61',
-    line: '#dcd4c5', lineStrong: '#bfb5a2',
-    accent: '#b8460d', accentDeep: '#923506', accentSoft: '#f0dfd1',
-    green: '#367951', blue: '#315c97',
-    grain: 0.045, glowColor: '#ffffff', glowAlpha: 0.55,
-  },
   dark: {
-    bg: '#14120f', surface: '#1c1916', recessed: '#221e1a',
-    ink: '#f3f0e8', muted: '#b3a99b', faint: '#8b8175',
-    line: '#332e28', lineStrong: '#4a433a',
-    accent: '#e0662a', accentDeep: '#b8460d', accentSoft: '#3a2418',
-    green: '#4e9e6c', blue: '#5b86c4',
-    grain: 0.05, glowColor: '#e0662a', glowAlpha: 0.12,
+    canvas: '#0a0a0a', dots: '#333333',
+    panel: '#181818', panel2: '#222222', border: '#2d2d2d',
+    text: '#ececec', muted: '#9a9a9a',
+    accent: '#4e8cff', accentBg: 'rgba(78,140,255,0.12)', accentBorder: 'rgba(78,140,255,0.4)',
+    glass: 'rgba(24,24,24,0.71)', glassStrong: 'rgba(24,24,24,0.78)',
+    hover: 'rgba(255,255,255,0.06)',
+  },
+  light: {
+    canvas: '#ecedf0', dots: '#cfd2d8',
+    panel: '#ffffff', panel2: '#efefef', border: '#dedede',
+    text: '#1a1a1a', muted: '#6e6e6e',
+    accent: '#2b6cf6', accentBg: 'rgba(43,108,246,0.10)', accentBorder: 'rgba(43,108,246,0.35)',
+    glass: 'rgba(255,255,255,0.85)', glassStrong: 'rgba(255,255,255,0.92)',
+    hover: 'rgba(0,0,0,0.05)',
   },
 };
 
-/* Named families first for anyone who has them; the fallbacks are what most
-   viewers actually get, since camo will not load a webfont for us. */
-const SERIF = "Libre Caslon Text, Georgia, 'Times New Roman', serif";
-const SANS = "'IBM Plex Sans', ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, sans-serif";
-const MONO = "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+/* Theme-independent in the app: status colors, edges, handles, terminal body. */
+const OK = '#22c55e';
+const WARN = '#f59e0b';
+const EDGE = '#3b82f6';
+const HANDLE_RING = '#15803d';
 
-/* ── tiny SVG helpers ────────────────────────────────────────────────────── */
+/**
+ * The terminal surface stays dark in both themes, exactly as it does in the app.
+ * Light mode needs more opacity or the canvas bleeds through and washes it to
+ * mid-grey. Anything drawn ON this surface must use TERM_* colours below —
+ * theme text colours are chosen against the theme background, not this one, and
+ * go invisible here.
+ */
+const TERM_BG = { dark: 'rgba(13,13,13,0.73)', light: 'rgba(13,13,13,0.92)' };
+const TERM_TEXT = '#e5e7eb';
+const TERM_MUTED = '#9a9a9a';
+const TERM_ACCENT = '#60a5fa';
+const ANSI = {
+  fg: '#e5e7eb', dim: '#6b7280', green: '#4ade80', blue: '#60a5fa',
+  yellow: '#fbbf24', red: '#fca5a5', magenta: '#c084fc',
+};
+
+/* HarnessLogo.tsx:73-107 */
+const HARNESS = { 'claude code': '#D97757', codex: '#10A37F', october: '#A855F7' };
+const harnessColor = (name) => HARNESS[name.toLowerCase()] ?? '#9CA3AF';
+
+/* styles.css:131-141 — no webfont is bundled, so this is the real stack. */
+const UI = "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+const MONO = "'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace";
+
+/* ── svg helpers ─────────────────────────────────────────────────────────── */
 
 const esc = (s) => String(s)
-  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-  .replace(/"/g, '&quot;');
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const attrs = (o) => Object.entries(o)
   .filter(([, v]) => v !== undefined && v !== null && v !== '')
   .map(([k, v]) => `${k}="${typeof v === 'string' ? esc(v) : v}"`)
   .join(' ');
 
-const text = (x, y, content, o = {}) => {
-  const { font = MONO, size = 12, fill, weight, anchor, spacing, style, opacity } = o;
+const text = (x, y, s, o = {}) => {
+  const { font = UI, size = 12, fill, weight, anchor, spacing, opacity } = o;
   return `<text ${attrs({
     x, y, 'font-family': font, 'font-size': size, fill, 'font-weight': weight,
-    'text-anchor': anchor, 'letter-spacing': spacing, 'font-style': style, opacity,
-  })}>${esc(content)}</text>`;
+    'text-anchor': anchor, 'letter-spacing': spacing, opacity,
+  })}>${esc(s)}</text>`;
 };
 
 const rect = (x, y, w, h, o = {}) => `<rect ${attrs({ x, y, width: w, height: h, ...o })}/>`;
-const line = (x1, y1, x2, y2, o = {}) => `<line ${attrs({ x1, y1, x2, y2, ...o })}/>`;
 const circle = (cx, cy, r, o = {}) => `<circle ${attrs({ cx, cy, r, ...o })}/>`;
 const path = (d, o = {}) => `<path ${attrs({ d, ...o })}/>`;
-
-/** A dot that breathes. Status is a living thing, so it should look like one. */
-const liveDot = (cx, cy, r, fill, delay = 0) =>
-  `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}">
-     <animate attributeName="opacity" values="1;.3;1" dur="2.4s"
-              begin="${delay}s" repeatCount="indefinite"/>
-   </circle>`;
-
-/** A message travelling an edge of the bus. */
-const pulse = (d, t, delay, fill) =>
-  `<circle r="3.5" fill="${fill}" opacity="0">
-     <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1"
-              dur="${t}s" begin="${delay}s" repeatCount="indefinite"/>
-     <animateMotion dur="${t}s" begin="${delay}s" repeatCount="indefinite" path="${esc(d)}"/>
-   </circle>`;
+const line = (x1, y1, x2, y2, o = {}) => `<line ${attrs({ x1, y1, x2, y2, ...o })}/>`;
 
 /**
- * Deliberately a no-op.
- *
- * An earlier pass staggered every group in with SMIL, which meant the whole
- * composition sat at opacity 0 until animation ran. Any renderer that skips
- * SMIL — and there are several between here and a reader's browser — got a
- * blank rectangle. Animation may only ever ADD to a README image, so entrances
- * are gone and the moving parts below (pulses, breathing dots) are additive.
+ * React Flow's `smoothstep` — orthogonal with rounded corners, exiting the
+ * source downward and entering the target from above. Not a bezier; the app
+ * switched away from those (CanvasView.tsx:767).
  */
-const arrive = () => '';
+function smoothstep(x1, y1, x2, y2, r = 12) {
+  if (Math.abs(x2 - x1) < 1) return `M${x1} ${y1} L${x2} ${y2}`;
+  const my = (y1 + y2) / 2;
+  const dir = x2 > x1 ? 1 : -1;
+  return [
+    `M${x1} ${y1}`,
+    `L${x1} ${my - r}`,
+    `Q${x1} ${my} ${x1 + dir * r} ${my}`,
+    `L${x2 - dir * r} ${my}`,
+    `Q${x2} ${my} ${x2} ${my + r}`,
+    `L${x2} ${y2}`,
+  ].join(' ');
+}
 
-const defs = (t, id) => `
+/** Both ends carry a closed arrowhead — October's connections are two-way. */
+const markers = (id) => `
+  <marker id="ar-${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="${EDGE}"/>
+  </marker>`;
+
+/** 18px connection handle, styles.css:559-580 + TerminalNode.tsx:1236 */
+const handle = (cx, cy) => `
+  ${circle(cx, cy, 9, { fill: OK, stroke: HANDLE_RING, 'stroke-width': 3 })}`;
+
+/** Ambient bus dot: 2.6s along the edge, opacity 0 → .9 → 0 (styles.css:864-880) */
+const flowDot = (d, dur, delay, fill, r) => `
+  <circle r="${r}" fill="${fill}" opacity="0">
+    <animate attributeName="opacity" values="0;.9;.9;0" keyTimes="0;.15;.8;1"
+             dur="${dur}s" begin="${delay}s" repeatCount="indefinite"/>
+    <animateMotion dur="${dur}s" begin="${delay}s" repeatCount="indefinite" path="${esc(d)}"/>
+  </circle>`;
+
+const liveDot = (cx, cy, r, fill, delay = 0) => `
+  <circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}">
+    <animate attributeName="opacity" values="1;.35;1" dur="2.4s" begin="${delay}s" repeatCount="indefinite"/>
+  </circle>`;
+
+/** 20px dot grid, radius 1 — CanvasView.tsx:1612-1617 */
+const canvas = (t, id, w, h) => `
   <defs>
-    <filter id="grain-${id}" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 ${t.grain} 0"/>
-    </filter>
-    <radialGradient id="glow-${id}" cx="12%" cy="8%" r="55%">
-      <stop offset="0%" stop-color="${t.glowColor}" stop-opacity="${t.glowAlpha}"/>
-      <stop offset="100%" stop-color="${t.glowColor}" stop-opacity="0"/>
-    </radialGradient>
-  </defs>`;
-
-const paper = (t, id, w, h) => `
-  ${rect(0, 0, w, h, { fill: t.bg })}
-  ${rect(0, 0, w, h, { fill: `url(#glow-${id})` })}
-  ${rect(0, 0, w, h, { filter: `url(#grain-${id})`, opacity: 0.9 })}`;
-
-/** October's roman-numeral section mark. */
-const plate = (x, y, mark, label, t) => `
-  ${rect(x, y - 16, 24, 24, { fill: 'none', stroke: t.lineStrong, rx: 4 })}
-  ${text(x + 12, y + 1, mark, { size: 11, fill: t.muted, anchor: 'middle', spacing: '.04em' })}
-  ${text(x + 36, y + 1, label, { size: 11, fill: t.muted, spacing: '.13em' })}`;
-
-const header = (t, w, left, right) => `
-  ${liveDot(44, 52, 4, t.green)}
-  ${text(62, 57, left, { size: 14, fill: t.muted, spacing: '.06em' })}
-  ${text(w - 40, 57, right, { size: 12, fill: t.faint, spacing: '.06em', anchor: 'end' })}
-  ${line(40, 82, w - 40, 82, { stroke: t.line })}`;
-
-const footer = (t, w, y, left, right) => `
-  ${line(40, y, w - 40, y, { stroke: t.line })}
-  ${text(40, y + 26, left, { size: 11, fill: t.faint, spacing: '.1em' })}
-  ${text(w - 40, y + 26, right, { size: 11, fill: t.accent, spacing: '.1em', anchor: 'end' })}`;
+    <pattern id="dots-${id}" width="20" height="20" patternUnits="userSpaceOnUse">
+      ${circle(1, 1, 1, { fill: t.dots })}
+    </pattern>
+    ${markers(id)}
+  </defs>
+  ${rect(0, 0, w, h, { fill: t.canvas })}
+  ${rect(0, 0, w, h, { fill: `url(#dots-${id})` })}`;
 
 const svg = (w, h, body, title) =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${esc(title)}">
 ${body}
 </svg>`;
 
-/* ── I. the operation ────────────────────────────────────────────────────── */
+/* ── chrome ──────────────────────────────────────────────────────────────── */
 
-const agentCard = (a, x, y, t, delay) => {
-  const w = 360, h = 112;
-  const active = a.state === 'active';
-  return `<g>
-    ${rect(x, y, w, h, { fill: t.surface, stroke: t.line, rx: 10 })}
-    ${rect(x, y, 3, h, { fill: active ? t.accent : t.lineStrong, rx: 1.5 })}
-    ${circle(x + 26, y + 34, 6, { fill: t.accentSoft, stroke: t.accent })}
-    ${text(x + 46, y + 33, a.name, { font: SANS, size: 17, weight: 600, fill: t.ink })}
-    ${text(x + 46, y + 54, a.harness.toLowerCase(), { size: 12, fill: t.faint, spacing: '.05em' })}
-    ${line(x + 20, y + 72, x + w - 20, y + 72, { stroke: t.line })}
-    ${text(x + 20, y + 94, a.machine, { size: 12, fill: t.muted })}
-    ${liveDot(x + w - 24, y + 90, 4, t.green, delay)}
-    ${text(x + w - 38, y + 94, a.status, { size: 12, fill: t.green, anchor: 'end' })}
-  </g>`;
+/** TopNav.tsx:254-506 — floats over the canvas, 86px left inset for traffic lights. */
+const topBar = (t, w, project, right) => `
+  ${rect(0, 0, w, 40, { fill: t.glass })}
+  ${line(0, 40, w, 40, { stroke: t.border })}
+  ${circle(16, 20, 6, { fill: '#ff5f57' })}
+  ${circle(36, 20, 6, { fill: '#febc2e' })}
+  ${circle(56, 20, 6, { fill: '#28c840' })}
+  ${rect(86, 12, 16, 16, { fill: '#A855F7', rx: 3 })}
+  ${text(110, 25, 'October', { size: 14, weight: 500, fill: t.text, spacing: '.02em' })}
+  ${line(176, 10, 176, 30, { stroke: t.border })}
+  ${text(190, 25, project, { size: 12, weight: 500, fill: t.text })}
+  ${rect(w - 268, 11, 92, 18, { fill: t.accentBg, stroke: t.accentBorder, rx: 9 })}
+  ${liveDot(w - 256, 20, 3, t.accent)}
+  ${text(w - 246, 24, '2 agents', { size: 10, fill: t.accent })}
+  ${rect(w - 168, 11, 100, 18, { fill: 'rgba(245,158,11,0.14)', stroke: 'rgba(245,158,11,0.4)', rx: 9 })}
+  ${text(w - 156, 24, right, { size: 10, fill: WARN })}`;
+
+/** Dock.tsx:776-793 — glass pill, 18px radius, icon tiles only. */
+const dock = (t, cx, y, tiles) => {
+  const slot = 42;
+  const w = tiles.length * slot + 14;
+  const x = cx - w / 2;
+  return `
+  ${rect(x, y, w, slot + 8, { fill: t.glass, stroke: t.border, rx: 18 })}
+  ${tiles.map((c, i) => {
+    const tx = x + 7 + i * slot;
+    return `${rect(tx, y + 6, slot - 8, slot - 8, { fill: c, rx: 9, opacity: 0.9 })}`;
+  }).join('')}`;
 };
 
-const busNode = (t, delay) => {
-  const x = 470, y = 390, w = 260, h = 92;
-  const hx = x + 36, hy = y + h / 2;
-  const hex = [0, 1, 2, 3, 4, 5]
-    .map((i) => {
-      const a = (Math.PI / 3) * i - Math.PI / 2;
-      return `${(hx + 13 * Math.cos(a)).toFixed(1)},${(hy + 13 * Math.sin(a)).toFixed(1)}`;
-    })
-    .join(' ');
+/* ── nodes ───────────────────────────────────────────────────────────────── */
+
+/**
+ * TerminalNode.tsx:1390-1700 — 12px radius, 2px border, 44px glass header,
+ * body rgba(13,13,13,0.73). The header reads: status dot, harness logo, agent
+ * name at 15px/600, then "· <harness>" at 10px in the harness brand colour.
+ */
+function terminalNode({ t, tk, x, y, w, h, name, harness, model, status, lines }) {
+  const hc = harnessColor(harness);
+  const dotColor = status === 'exited' ? '#6b7280' : status === 'blocked' ? WARN : OK;
+  const nameW = name.length * 8.4;
+
   return `<g>
-    ${rect(x - 6, y - 6, w + 12, h + 12, { fill: 'none', stroke: t.line, rx: 16, opacity: 0.6 })}
-    ${rect(x, y, w, h, { fill: t.recessed, stroke: t.lineStrong, rx: 12 })}
-    <polygon points="${hex}" fill="none" stroke="${t.accent}" stroke-width="1.5"/>
-    ${circle(hx, hy, 3, { fill: t.accent })}
-    ${text(x + 66, y + 42, 'october bus', { font: SANS, size: 16, weight: 600, fill: t.ink })}
-    ${text(x + 66, y + 63, 'shared state · direct messages', { size: 11, fill: t.faint })}
+    ${rect(x, y, w, h, { fill: TERM_BG[tk], stroke: t.border, 'stroke-width': 2, rx: 12 })}
+    ${rect(x + 1, y + 1, w - 2, 43, { fill: t.glass, rx: 11 })}
+    ${rect(x + 1, y + 22, w - 2, 22, { fill: t.glass })}
+    ${line(x + 1, y + 44, x + w - 1, y + 44, { stroke: t.border })}
+
+    ${liveDot(x + 16, y + 22, 4, dotColor)}
+    ${rect(x + 27, y + 13, 18, 18, { fill: hc, rx: 4, opacity: 0.92 })}
+    ${text(x + 36, y + 26, harness[0].toUpperCase(), { size: 11, weight: 700, fill: '#0a0a0a', anchor: 'middle' })}
+    ${text(x + 53, y + 27, name, { size: 15, weight: 600, fill: t.text, spacing: '-.01em' })}
+    ${text(x + 57 + nameW, y + 27, `· ${harness}`, { size: 10, weight: 500, fill: hc })}
+    ${text(x + w - 16, y + 27, model, { size: 10, weight: 500, fill: t.muted, anchor: 'end' })}
+
+    ${lines.map((l, i) => text(x + 16, y + 72 + i * 20, l.s, {
+      font: MONO, size: 12, fill: ANSI[l.c] ?? ANSI.fg,
+    })).join('\n    ')}
   </g>`;
-};
-
-const traceRow = (row, y, t, delay) => {
-  const map = {
-    detect: { glyph: '▸', color: t.blue }, message: { glyph: '▸', color: t.accent },
-    reject: { glyph: '✗', color: t.accentDeep }, verdict: { glyph: '✓', color: t.green },
-    commit: { glyph: '●', color: t.muted },
-  };
-  const { glyph, color } = map[row.kind] ?? map.message;
-  const human = row.actor === 'harsh';
-  return `<g>
-    ${rect(40, y - 17, 96, 24, {
-      fill: human ? 'none' : t.accentSoft, stroke: human ? t.green : 'none', rx: 6,
-    })}
-    ${text(88, y, row.actor, {
-      size: 11, fill: human ? t.green : t.accentDeep, anchor: 'middle', spacing: '.06em',
-    })}
-    ${text(152, y, glyph, { size: 13, fill: color })}
-    ${text(176, y, row.text, { size: 14, fill: t.ink })}
-    ${text(1160, y, row.sub, { size: 11, fill: t.faint, anchor: 'end' })}
-  </g>`;
-};
-
-function renderHero(theme) {
-  const t = THEMES[theme];
-  const W = 1200, H = 980;
-  const [a1, a2] = state.agents;
-  const m = state.message;
-
-  const edgeL = 'M220 282 C220 366 336 436 470 436';
-  const edgeR = 'M980 282 C980 366 864 436 730 436';
-  const drop = 'M600 482 L600 512';
-
-  const body = `
-  ${defs(t, `hero-${theme}`)}
-  ${paper(t, `hero-${theme}`, W, H)}
-  ${header(t, W, state.operation, `${state.agents.length} agents · 1 operator · live`)}
-  ${plate(40, 124, 'I', 'THE OPERATION', t)}
-
-  ${agentCard(a1, 40, 170, t, 0.15)}
-  ${agentCard(a2, 800, 170, t, 0.3)}
-
-  <g>
-    ${path(edgeL, { fill: 'none', stroke: t.lineStrong, 'stroke-width': 1.25 })}
-    ${path(edgeR, { fill: 'none', stroke: t.lineStrong, 'stroke-width': 1.25 })}
-    ${path(drop, { fill: 'none', stroke: t.lineStrong, 'stroke-width': 1.25, 'stroke-dasharray': '3 4' })}
-    ${path('M595 506 L600 514 L605 506 Z', { fill: t.lineStrong })}
-  </g>
-  ${pulse(edgeL, 2.6, 1.2, t.accent)}
-  ${pulse(edgeR, 2.6, 2.1, t.blue)}
-  ${busNode(t, 0.6)}
-
-  <g>
-    ${rect(300, 520, 600, 112, { fill: t.surface, stroke: t.line, rx: 10 })}
-    ${text(324, 550, `${m.from} → ${m.to}`, { size: 11, fill: t.accent, spacing: '.1em' })}
-    ${text(324, 583, m.body, { font: SERIF, size: 17, fill: t.ink })}
-    ${text(324, 612, m.meta, { size: 11, fill: t.faint })}
-  </g>
-
-  ${plate(40, 686, 'II', 'THE TRACE', t)}
-  ${state.trace.map((r, i) => traceRow(r, 736 + i * 44, t, 1.0 + i * 0.12)).join('\n')}
-
-  ${footer(t, W, 930, state.footer.left, state.footer.right)}`;
-
-  return svg(W, H, body, `${state.operation} — a live October operation maintaining this profile`);
 }
 
-/* ── II. the supervision ledger ──────────────────────────────────────────── */
+/* ── I. the operation ────────────────────────────────────────────────────── */
+
+function renderOperation(theme) {
+  const t = THEMES[theme];
+  const W = 1200, H = 604;
+  const [a1, a2] = state.agents;
+
+  const nw = 486, nh = 202;
+  const ax = 60, bx = W - 60 - nw, ny = 78;
+  const aOut = [ax + nw / 2, ny + nh];
+  const bOut = [bx + nw / 2, ny + nh];
+
+  const busX = 460, busY = 396, busW = 280, busH = 96;
+  const busInL = [busX + 70, busY];
+  const busInR = [busX + busW - 70, busY];
+
+  const eL = smoothstep(aOut[0], aOut[1], busInL[0], busInL[1]);
+  const eR = smoothstep(bOut[0], bOut[1], busInR[0], busInR[1]);
+
+  const body = `
+  ${canvas(t, `op-${theme}`, W, H)}
+
+  ${path(eL, { fill: 'none', stroke: EDGE, 'stroke-width': 3, 'marker-start': `url(#ar-op-${theme})`, 'marker-end': `url(#ar-op-${theme})` })}
+  ${path(eR, { fill: 'none', stroke: EDGE, 'stroke-width': 3, 'marker-start': `url(#ar-op-${theme})`, 'marker-end': `url(#ar-op-${theme})` })}
+  ${flowDot(eL, 2.6, 0, EDGE, 3)}
+  ${flowDot(eR, 1.6, 1.1, WARN, 3.5)}
+
+  ${terminalNode({
+    t, tk: theme, x: ax, y: ny, w: nw, h: nh,
+    name: a1.name, harness: a1.harness, model: 'opus-5', status: 'running',
+    lines: [
+      { s: '$ october watch --repos', c: 'dim' },
+      { s: '▸ release detected   filenav@1.4.0', c: 'green' },
+      { s: '▸ drafted entry from 4 commits', c: 'green' },
+      { s: '→ delegate atlas  "verify every number"', c: 'blue' },
+      { s: '  blocked on: atlas', c: 'dim' },
+    ],
+  })}
+
+  ${terminalNode({
+    t, tk: theme, x: bx, y: ny, w: nw, h: nh,
+    name: a2.name, harness: a2.harness, model: 'gpt-5', status: 'blocked',
+    lines: [
+      { s: '$ october review --task 412', c: 'dim' },
+      { s: '✗ reject  "2.1k installs" unverified', c: 'red' },
+      { s: '  no source in repo or API', c: 'dim' },
+      { s: '▲ escalate operator', c: 'yellow' },
+      { s: '  verdict: edit · 2 bits', c: 'magenta' },
+    ],
+  })}
+
+  ${handle(aOut[0], aOut[1])}
+  ${handle(bOut[0], bOut[1])}
+  ${handle(busInL[0], busInL[1])}
+  ${handle(busInR[0], busInR[1])}
+
+  <g>
+    ${rect(busX, busY, busW, busH, { fill: TERM_BG[theme], stroke: t.accent, 'stroke-width': 2, rx: 12 })}
+    ${rect(busX + 1, busY + 1, busW - 2, 43, { fill: t.glassStrong, rx: 11 })}
+    ${rect(busX + 1, busY + 22, busW - 2, 22, { fill: t.glassStrong })}
+    ${line(busX + 1, busY + 44, busX + busW - 1, busY + 44, { stroke: t.border })}
+    ${liveDot(busX + 16, busY + 22, 4, t.accent)}
+    ${text(busX + 30, busY + 27, 'october bus', { size: 15, weight: 600, fill: t.text, spacing: '-.01em' })}
+    ${text(busX + 16, busY + 72, 'shared state · direct messages', { font: MONO, size: 11, fill: TERM_MUTED })}
+  </g>
+
+  ${topBar(t, W, state.operation, '1 needs you')}
+  ${dock(t, W / 2, H - 56, ['#D97757', '#10A37F', '#A855F7', '#3b82f6', '#f59e0b'])}`;
+
+  return svg(W, H, body, 'operation.profile — two agents on the October Bus');
+}
+
+/* ── II. the ledger ──────────────────────────────────────────────────────── */
 
 function renderLedger(theme) {
   const t = THEMES[theme];
-  const W = 1200, H = 440;
-  const { verdicts, bitsPerVerdict, vocabulary, window } = state.ledger;
+  const W = 1200, H = 300;
+  const { verdicts, bitsPerVerdict, vocabulary } = state.ledger;
   const bits = verdicts.length * bitsPerVerdict;
   const outcomes = Math.pow(vocabulary, verdicts.length);
-  const SENTENCE = 50; // bits in a sentence, per the Wega thesis
-  const cells = 24;
-  const filled = Math.min(cells, bits);
 
-  /* Each square is one bit the operator actually emitted. */
+  const cells = 24;
   const strip = Array.from({ length: cells }, (_, i) => {
-    const x = 40 + i * 26;
-    const on = i < filled;
-    return `${rect(x, 250, 18, 18, {
-      fill: on ? t.accent : 'none', stroke: on ? t.accent : t.lineStrong, rx: 3,
-      opacity: on ? 1 : 0.5,
-    })}${on ? `<animate attributeName="opacity" values="0;1" begin="${(0.6 + i * 0.06).toFixed(2)}s" dur=".3s" fill="freeze"/>` : ''}`;
+    const on = i < bits;
+    return rect(48 + i * 22, 176, 14, 14, {
+      fill: on ? t.accent : 'none', stroke: on ? t.accent : t.border, rx: 3,
+      opacity: on ? 1 : 0.6,
+    });
   }).join('');
 
   const body = `
-  ${defs(t, `led-${theme}`)}
-  ${paper(t, `led-${theme}`, W, H)}
-  ${header(t, W, 'supervision.ledger', window)}
-  ${plate(40, 124, 'III', 'WHAT THE OPERATOR SPENT', t)}
-
+  ${canvas(t, `led-${theme}`, W, H)}
   <g>
-    ${text(40, 196, 'The agents proposed. The operator selected.', { font: SERIF, size: 34, fill: t.ink })}
-  </g>
+    ${rect(24, 24, W - 48, H - 48, { fill: t.glass, stroke: t.border, 'stroke-width': 2, rx: 18 })}
+    ${liveDot(48, 62, 4, OK)}
+    ${text(62, 67, 'supervision.ledger', { font: MONO, size: 12, fill: t.muted })}
+    ${text(W - 48, 67, state.ledger.window, { font: MONO, size: 11, fill: t.muted, anchor: 'end' })}
+    ${line(24, 88, W - 24, 88, { stroke: t.border })}
 
-  <g>
+    ${text(48, 136, 'The agents proposed. The operator selected.', { size: 26, weight: 600, fill: t.text, spacing: '-.015em' })}
+
     ${strip}
-    ${text(40, 300, `${bits} bits emitted`, { font: SANS, size: 15, weight: 600, fill: t.accent, spacing: '.02em' })}
-    ${text(40, 300 + 26, `${verdicts.length} adjudications · one selection among {${verdicts.join(', ')}, defer} · log₂(${vocabulary}) = ${bitsPerVerdict} bits each`, { size: 12, fill: t.muted })}
-    ${text(40, 300 + 48, `${vocabulary}^${verdicts.length} = ${outcomes} reachable outcomes · a sentence carries ~${SENTENCE} bits`, { size: 12, fill: t.faint })}
-  </g>
+    ${text(48 + cells * 22 + 14, 188, `${bits} bits`, { size: 15, weight: 600, fill: t.accent })}
 
-  ${line(760, 150, 760, 372, { stroke: t.line })}
-  <g>
-    ${text(800, 196, 'Selection is not authoring.', { font: SERIF, size: 22, style: 'italic', fill: t.muted })}
-    ${text(800, 240, 'A deliberate signal carries one or two', { size: 13, fill: t.muted })}
-    ${text(800, 262, 'bits per second. A sentence carries fifty.', { size: 13, fill: t.muted })}
-    ${text(800, 292, 'So the model proposes options,', { size: 13, fill: t.muted })}
-    ${text(800, 314, 'and the person selects among them.', { size: 13, fill: t.muted })}
-    ${text(800, 348, 'wegalabs.com — interface research', { size: 11, fill: t.accent, spacing: '.08em' })}
-  </g>
+    ${text(48, 228, `${verdicts.length} adjudications · one selection among {approve, edit, reject, defer} · log₂(${vocabulary}) = ${bitsPerVerdict} bits each`, { font: MONO, size: 11, fill: t.muted })}
+    ${text(48, 250, `${vocabulary}^${verdicts.length} = ${outcomes} reachable outcomes · a sentence carries ~50 bits · wegalabs.com`, { font: MONO, size: 11, fill: t.muted, opacity: 0.75 })}
+  </g>`;
 
-  ${footer(t, W, 392, 'october is the first testbed', 'wegalabs.com')}`;
-
-  return svg(W, H, body, `Supervision ledger — ${bits} bits emitted ${window}`);
+  return svg(W, H, body, `Supervision ledger — ${bits} bits emitted`);
 }
 
 /* ── III. the agent card ─────────────────────────────────────────────────── */
 
 function renderCard(theme) {
   const t = THEMES[theme];
-  const W = 1200, H = 470;
+  const W = 1200, H = 340;
   const c = state.card, op = state.operator;
-
-  /* Deterministic bars — a barcode, not random noise, so redeploys are stable. */
-  const seedStr = op.handle;
-  const bars = Array.from({ length: 120 }, (_, i) => {
-    const code = seedStr.charCodeAt(i % seedStr.length);
-    const w = ((code + i * 7) % 3) + 1;
-    const x = 40 + i * 9;
-    return rect(x, 404, w, 20, { fill: t.ink, opacity: 0.55 });
-  }).join('');
+  const x = 24, y = 24, w = W - 48, h = H - 48;
 
   const skills = c.skills.map((s, i) => {
-    const y = 232 + i * 32;
-    return `<g>
-      ${text(660, y, '▸', { size: 11, fill: t.accent })}
-      ${text(682, y, s.name, { size: 13, fill: t.ink })}
-      ${text(1160, y, s.desc, { size: 11, fill: t.faint, anchor: 'end' })}
-    </g>`;
-  }).join('');
+    const yy = y + 116 + i * 30;
+    return `${text(x + 24, yy, s.name, { font: MONO, size: 12, fill: TERM_TEXT })}
+      ${text(x + 210, yy, s.desc, { font: MONO, size: 11, fill: TERM_MUTED })}`;
+  }).join('\n    ');
 
   const body = `
-  ${defs(t, `card-${theme}`)}
-  ${paper(t, `card-${theme}`, W, H)}
-  ${header(t, W, 'agent.card', c.protocol)}
-  ${plate(40, 124, 'IV', 'A PEER YOU CAN CONNECT TO', t)}
-
+  ${canvas(t, `card-${theme}`, W, H)}
   <g>
-    ${text(40, 196, op.name, { font: SERIF, size: 40, fill: t.ink })}
-    ${text(40, 232, `@${op.handle}`, { size: 14, fill: t.accent, spacing: '.06em' })}
-    ${line(40, 254, 600, 254, { stroke: t.line })}
-    ${text(40, 284, 'ROLE', { size: 10, fill: t.faint, spacing: '.14em' })}
-    ${text(150, 284, `${op.role} · human peer`, { size: 13, fill: t.ink })}
-    ${text(40, 312, 'HARNESS', { size: 10, fill: t.faint, spacing: '.14em' })}
-    ${text(150, 312, `wetware · ${op.location}`, { size: 13, fill: t.ink })}
-    ${text(40, 340, 'ORG', { size: 10, fill: t.faint, spacing: '.14em' })}
-    ${text(150, 340, `${op.org} · ${op.product}`, { size: 13, fill: t.ink })}
-    ${text(40, 368, 'CONNECT', { size: 10, fill: t.faint, spacing: '.14em' })}
-    ${text(150, 368, c.mcp, { size: 13, fill: t.accent })}
-  </g>
+    ${rect(x, y, w, h, { fill: TERM_BG[theme], stroke: t.border, 'stroke-width': 2, rx: 12 })}
+    ${rect(x + 1, y + 1, w - 2, 43, { fill: t.glass, rx: 11 })}
+    ${rect(x + 1, y + 22, w - 2, 22, { fill: t.glass })}
+    ${line(x + 1, y + 44, x + w - 1, y + 44, { stroke: t.border })}
 
-  ${line(630, 150, 630, 380, { stroke: t.line })}
-  <g>
-    ${text(660, 196, 'SKILLS', { size: 10, fill: t.faint, spacing: '.14em' })}
-    ${liveDot(1156, 192, 4, t.green)}
-    ${text(1140, 196, 'resolvable', { size: 10, fill: t.green, spacing: '.1em', anchor: 'end' })}
-  </g>
-  ${skills}
+    ${liveDot(x + 16, y + 22, 4, OK)}
+    ${rect(x + 27, y + 13, 18, 18, { fill: '#A855F7', rx: 4 })}
+    ${text(x + 36, y + 26, 'H', { size: 11, weight: 700, fill: '#0a0a0a', anchor: 'middle' })}
+    ${text(x + 53, y + 27, op.name, { size: 15, weight: 600, fill: t.text, spacing: '-.01em' })}
+    ${text(x + 232, y + 27, `· ${op.role} · human peer`, { size: 10, weight: 500, fill: '#A855F7' })}
+    ${text(x + w - 16, y + 27, c.protocol, { size: 10, weight: 500, fill: t.muted, anchor: 'end' })}
 
-  <g>${bars}</g>
-  ${text(40, 448, c.endpoint, { size: 10, fill: t.faint, spacing: '.06em' })}
-  ${text(1160, 448, 'october.dev', { size: 10, fill: t.accent, spacing: '.1em', anchor: 'end' })}`;
+    ${text(x + 24, y + 84, '$ ' + c.mcp, { font: MONO, size: 13, fill: ANSI.green })}
+    ${skills}
 
-  return svg(W, H, body, `Agent card for ${op.name} — connect via ${c.mcp}`);
+    ${line(x + 1, y + h - 44, x + w - 1, y + h - 44, { stroke: t.border })}
+    ${text(x + 24, y + h - 18, c.endpoint, { font: MONO, size: 10, fill: TERM_MUTED })}
+    ${text(x + w - 24, y + h - 18, 'october.dev', { font: MONO, size: 10, fill: TERM_ACCENT, anchor: 'end' })}
+  </g>`;
+
+  return svg(W, H, body, `Agent card — ${op.name}`);
 }
 
 /* ── emit ────────────────────────────────────────────────────────────────── */
 
-const targets = [
-  ['operation', renderHero],
-  ['ledger', renderLedger],
-  ['card', renderCard],
-];
-
+const targets = [['operation', renderOperation], ['ledger', renderLedger], ['card', renderCard]];
 mkdirSync(join(root, 'assets'), { recursive: true });
 
 let total = 0;
 for (const [name, render] of targets) {
-  for (const theme of ['light', 'dark']) {
+  for (const theme of ['dark', 'light']) {
     const out = join(root, 'assets', `${name}-${theme}.svg`);
     const content = render(theme);
     writeFileSync(out, content);
@@ -368,4 +381,4 @@ for (const [name, render] of targets) {
     console.log(`  assets/${name}-${theme}.svg  ${(content.length / 1024).toFixed(1)}kb`);
   }
 }
-console.log(`\nrendered ${targets.length * 2} files · ${(total / 1024).toFixed(1)}kb total`);
+console.log(`\nrendered ${targets.length * 2} files · ${(total / 1024).toFixed(1)}kb`);

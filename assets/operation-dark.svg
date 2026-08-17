@@ -1,136 +1,120 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 980" width="1200" height="980" role="img" aria-label="operation.profile — a live October operation maintaining this profile">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 604" width="1200" height="604" role="img" aria-label="operation.profile — two agents on the October Bus">
 
   
   <defs>
-    <filter id="grain-hero-dark" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/>
-    </filter>
-    <radialGradient id="glow-hero-dark" cx="12%" cy="8%" r="55%">
-      <stop offset="0%" stop-color="#e0662a" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#e0662a" stop-opacity="0"/>
-    </radialGradient>
+    <pattern id="dots-op-dark" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#333333"/>
+    </pattern>
+    
+  <marker id="ar-op-dark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#3b82f6"/>
+  </marker>
   </defs>
+  <rect x="0" y="0" width="1200" height="604" fill="#0a0a0a"/>
+  <rect x="0" y="0" width="1200" height="604" fill="url(#dots-op-dark)"/>
+
+  <path d="M303 280 L303 326 Q303 338 315 338 L518 338 Q530 338 530 350 L530 396" fill="none" stroke="#3b82f6" stroke-width="3" marker-start="url(#ar-op-dark)" marker-end="url(#ar-op-dark)"/>
+  <path d="M897 280 L897 326 Q897 338 885 338 L682 338 Q670 338 670 350 L670 396" fill="none" stroke="#3b82f6" stroke-width="3" marker-start="url(#ar-op-dark)" marker-end="url(#ar-op-dark)"/>
   
-  <rect x="0" y="0" width="1200" height="980" fill="#14120f"/>
-  <rect x="0" y="0" width="1200" height="980" fill="url(#glow-hero-dark)"/>
-  <rect x="0" y="0" width="1200" height="980" filter="url(#grain-hero-dark)" opacity="0.9"/>
+  <circle r="3" fill="#3b82f6" opacity="0">
+    <animate attributeName="opacity" values="0;.9;.9;0" keyTimes="0;.15;.8;1"
+             dur="2.6s" begin="0s" repeatCount="indefinite"/>
+    <animateMotion dur="2.6s" begin="0s" repeatCount="indefinite" path="M303 280 L303 326 Q303 338 315 338 L518 338 Q530 338 530 350 L530 396"/>
+  </circle>
   
-  <circle cx="44" cy="52" r="4" fill="#4e9e6c">
-     <animate attributeName="opacity" values="1;.3;1" dur="2.4s"
-              begin="0s" repeatCount="indefinite"/>
-   </circle>
-  <text x="62" y="57" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#b3a99b" letter-spacing=".06em">operation.profile</text>
-  <text x="1160" y="57" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#8b8175" text-anchor="end" letter-spacing=".06em">2 agents · 1 operator · live</text>
-  <line x1="40" y1="82" x2="1160" y2="82" stroke="#332e28"/>
-  
-  <rect x="40" y="108" width="24" height="24" fill="none" stroke="#4a433a" rx="4"/>
-  <text x="52" y="125" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b3a99b" text-anchor="middle" letter-spacing=".04em">I</text>
-  <text x="76" y="125" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b3a99b" letter-spacing=".13em">THE OPERATION</text>
+  <circle r="3.5" fill="#f59e0b" opacity="0">
+    <animate attributeName="opacity" values="0;.9;.9;0" keyTimes="0;.15;.8;1"
+             dur="1.6s" begin="1.1s" repeatCount="indefinite"/>
+    <animateMotion dur="1.6s" begin="1.1s" repeatCount="indefinite" path="M897 280 L897 326 Q897 338 885 338 L682 338 Q670 338 670 350 L670 396"/>
+  </circle>
 
   <g>
-    <rect x="40" y="170" width="360" height="112" fill="#1c1916" stroke="#332e28" rx="10"/>
-    <rect x="40" y="170" width="3" height="112" fill="#e0662a" rx="1.5"/>
-    <circle cx="66" cy="204" r="6" fill="#3a2418" stroke="#e0662a"/>
-    <text x="86" y="203" font-family="'IBM Plex Sans', ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, sans-serif" font-size="17" fill="#f3f0e8" font-weight="600">Apollo</text>
-    <text x="86" y="224" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#8b8175" letter-spacing=".05em">claude code</text>
-    <line x1="60" y1="242" x2="380" y2="242" stroke="#332e28"/>
-    <text x="60" y="264" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#b3a99b">your laptop</text>
-    <circle cx="376" cy="260" r="4" fill="#4e9e6c">
-     <animate attributeName="opacity" values="1;.3;1" dur="2.4s"
-              begin="0.15s" repeatCount="indefinite"/>
-   </circle>
-    <text x="362" y="264" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#4e9e6c" text-anchor="end">building</text>
-  </g>
-  <g>
-    <rect x="800" y="170" width="360" height="112" fill="#1c1916" stroke="#332e28" rx="10"/>
-    <rect x="800" y="170" width="3" height="112" fill="#e0662a" rx="1.5"/>
-    <circle cx="826" cy="204" r="6" fill="#3a2418" stroke="#e0662a"/>
-    <text x="846" y="203" font-family="'IBM Plex Sans', ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, sans-serif" font-size="17" fill="#f3f0e8" font-weight="600">Atlas</text>
-    <text x="846" y="224" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#8b8175" letter-spacing=".05em">codex</text>
-    <line x1="820" y1="242" x2="1140" y2="242" stroke="#332e28"/>
-    <text x="820" y="264" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#b3a99b">hetzner</text>
-    <circle cx="1136" cy="260" r="4" fill="#4e9e6c">
-     <animate attributeName="opacity" values="1;.3;1" dur="2.4s"
-              begin="0.3s" repeatCount="indefinite"/>
-   </circle>
-    <text x="1122" y="264" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#4e9e6c" text-anchor="end">reviewing</text>
+    <rect x="60" y="78" width="486" height="202" fill="rgba(13,13,13,0.73)" stroke="#2d2d2d" stroke-width="2" rx="12"/>
+    <rect x="61" y="79" width="484" height="43" fill="rgba(24,24,24,0.71)" rx="11"/>
+    <rect x="61" y="100" width="484" height="22" fill="rgba(24,24,24,0.71)"/>
+    <line x1="61" y1="122" x2="545" y2="122" stroke="#2d2d2d"/>
+
+    
+  <circle cx="76" cy="100" r="4" fill="#22c55e">
+    <animate attributeName="opacity" values="1;.35;1" dur="2.4s" begin="0s" repeatCount="indefinite"/>
+  </circle>
+    <rect x="87" y="91" width="18" height="18" fill="#D97757" rx="4" opacity="0.92"/>
+    <text x="96" y="104" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#0a0a0a" font-weight="700" text-anchor="middle">C</text>
+    <text x="113" y="105" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" fill="#ececec" font-weight="600" letter-spacing="-.01em">Apollo</text>
+    <text x="167.4" y="105" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#D97757" font-weight="500">· Claude Code</text>
+    <text x="530" y="105" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#9a9a9a" font-weight="500" text-anchor="end">opus-5</text>
+
+    <text x="76" y="150" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#6b7280">$ october watch --repos</text>
+    <text x="76" y="170" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#4ade80">▸ release detected   filenav@1.4.0</text>
+    <text x="76" y="190" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#4ade80">▸ drafted entry from 4 commits</text>
+    <text x="76" y="210" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#60a5fa">→ delegate atlas  &quot;verify every number&quot;</text>
+    <text x="76" y="230" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#6b7280">  blocked on: atlas</text>
   </g>
 
   <g>
-    <path d="M220 282 C220 366 336 436 470 436" fill="none" stroke="#4a433a" stroke-width="1.25"/>
-    <path d="M980 282 C980 366 864 436 730 436" fill="none" stroke="#4a433a" stroke-width="1.25"/>
-    <path d="M600 482 L600 512" fill="none" stroke="#4a433a" stroke-width="1.25" stroke-dasharray="3 4"/>
-    <path d="M595 506 L600 514 L605 506 Z" fill="#4a433a"/>
-  </g>
-  <circle r="3.5" fill="#e0662a" opacity="0">
-     <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1"
-              dur="2.6s" begin="1.2s" repeatCount="indefinite"/>
-     <animateMotion dur="2.6s" begin="1.2s" repeatCount="indefinite" path="M220 282 C220 366 336 436 470 436"/>
-   </circle>
-  <circle r="3.5" fill="#5b86c4" opacity="0">
-     <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1"
-              dur="2.6s" begin="2.1s" repeatCount="indefinite"/>
-     <animateMotion dur="2.6s" begin="2.1s" repeatCount="indefinite" path="M980 282 C980 366 864 436 730 436"/>
-   </circle>
-  <g>
-    <rect x="464" y="384" width="272" height="104" fill="none" stroke="#332e28" rx="16" opacity="0.6"/>
-    <rect x="470" y="390" width="260" height="92" fill="#221e1a" stroke="#4a433a" rx="12"/>
-    <polygon points="506.0,423.0 517.3,429.5 517.3,442.5 506.0,449.0 494.7,442.5 494.7,429.5" fill="none" stroke="#e0662a" stroke-width="1.5"/>
-    <circle cx="506" cy="436" r="3" fill="#e0662a"/>
-    <text x="536" y="432" font-family="'IBM Plex Sans', ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, sans-serif" font-size="16" fill="#f3f0e8" font-weight="600">october bus</text>
-    <text x="536" y="453" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#8b8175">shared state · direct messages</text>
-  </g>
+    <rect x="654" y="78" width="486" height="202" fill="rgba(13,13,13,0.73)" stroke="#2d2d2d" stroke-width="2" rx="12"/>
+    <rect x="655" y="79" width="484" height="43" fill="rgba(24,24,24,0.71)" rx="11"/>
+    <rect x="655" y="100" width="484" height="22" fill="rgba(24,24,24,0.71)"/>
+    <line x1="655" y1="122" x2="1139" y2="122" stroke="#2d2d2d"/>
 
-  <g>
-    <rect x="300" y="520" width="600" height="112" fill="#1c1916" stroke="#332e28" rx="10"/>
-    <text x="324" y="550" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#e0662a" letter-spacing=".1em">Apollo → Atlas</text>
-    <text x="324" y="583" font-family="Libre Caslon Text, Georgia, 'Times New Roman', serif" font-size="17" fill="#f3f0e8">filenav@1.4.0 shipped. Draft the entry, verify every number before it lands.</text>
-    <text x="324" y="612" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#8b8175">context attached · delivered</text>
+    
+  <circle cx="670" cy="100" r="4" fill="#f59e0b">
+    <animate attributeName="opacity" values="1;.35;1" dur="2.4s" begin="0s" repeatCount="indefinite"/>
+  </circle>
+    <rect x="681" y="91" width="18" height="18" fill="#10A37F" rx="4" opacity="0.92"/>
+    <text x="690" y="104" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#0a0a0a" font-weight="700" text-anchor="middle">C</text>
+    <text x="707" y="105" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" fill="#ececec" font-weight="600" letter-spacing="-.01em">Atlas</text>
+    <text x="753" y="105" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#10A37F" font-weight="500">· Codex</text>
+    <text x="1124" y="105" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#9a9a9a" font-weight="500" text-anchor="end">gpt-5</text>
+
+    <text x="670" y="150" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#6b7280">$ october review --task 412</text>
+    <text x="670" y="170" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#fca5a5">✗ reject  &quot;2.1k installs&quot; unverified</text>
+    <text x="670" y="190" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#6b7280">  no source in repo or API</text>
+    <text x="670" y="210" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#fbbf24">▲ escalate operator</text>
+    <text x="670" y="230" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#c084fc">  verdict: edit · 2 bits</text>
   </g>
 
   
-  <rect x="40" y="670" width="24" height="24" fill="none" stroke="#4a433a" rx="4"/>
-  <text x="52" y="687" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b3a99b" text-anchor="middle" letter-spacing=".04em">II</text>
-  <text x="76" y="687" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b3a99b" letter-spacing=".13em">THE TRACE</text>
+  <circle cx="303" cy="280" r="9" fill="#22c55e" stroke="#15803d" stroke-width="3"/>
+  
+  <circle cx="897" cy="280" r="9" fill="#22c55e" stroke="#15803d" stroke-width="3"/>
+  
+  <circle cx="530" cy="396" r="9" fill="#22c55e" stroke="#15803d" stroke-width="3"/>
+  
+  <circle cx="670" cy="396" r="9" fill="#22c55e" stroke="#15803d" stroke-width="3"/>
+
   <g>
-    <rect x="40" y="719" width="96" height="24" fill="#3a2418" stroke="none" rx="6"/>
-    <text x="88" y="736" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d" text-anchor="middle" letter-spacing=".06em">apollo</text>
-    <text x="152" y="736" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#5b86c4">▸</text>
-    <text x="176" y="736" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#f3f0e8">task#412 · release detected — filenav@1.4.0</text>
-    <text x="1160" y="736" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#8b8175" text-anchor="end">delegate → atlas</text>
-  </g>
-<g>
-    <rect x="40" y="763" width="96" height="24" fill="#3a2418" stroke="none" rx="6"/>
-    <text x="88" y="780" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d" text-anchor="middle" letter-spacing=".06em">apollo</text>
-    <text x="152" y="780" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#e0662a">▸</text>
-    <text x="176" y="780" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#f3f0e8">drafted entry “1.4.0 — natural-language rules”</text>
-    <text x="1160" y="780" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#8b8175" text-anchor="end">blocked on: atlas</text>
-  </g>
-<g>
-    <rect x="40" y="807" width="96" height="24" fill="#3a2418" stroke="none" rx="6"/>
-    <text x="88" y="824" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d" text-anchor="middle" letter-spacing=".06em">atlas</text>
-    <text x="152" y="824" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#b8460d">✗</text>
-    <text x="176" y="824" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#f3f0e8">rejected — “2.1k installs” is unverified</text>
-    <text x="1160" y="824" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#8b8175" text-anchor="end">escalate ▲ operator</text>
-  </g>
-<g>
-    <rect x="40" y="851" width="96" height="24" fill="none" stroke="#4e9e6c" rx="6"/>
-    <text x="88" y="868" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#4e9e6c" text-anchor="middle" letter-spacing=".06em">harsh</text>
-    <text x="152" y="868" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#4e9e6c">✓</text>
-    <text x="176" y="868" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#f3f0e8">edit — drop the number, keep the release</text>
-    <text x="1160" y="868" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#8b8175" text-anchor="end">2 bits emitted · 4m ago</text>
-  </g>
-<g>
-    <rect x="40" y="895" width="96" height="24" fill="#3a2418" stroke="none" rx="6"/>
-    <text x="88" y="912" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d" text-anchor="middle" letter-spacing=".06em">apollo</text>
-    <text x="152" y="912" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#b3a99b">●</text>
-    <text x="176" y="912" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#f3f0e8">committed README.md · operation.profile current</text>
-    <text x="1160" y="912" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#8b8175" text-anchor="end">3m ago</text>
+    <rect x="460" y="396" width="280" height="96" fill="rgba(13,13,13,0.73)" stroke="#4e8cff" stroke-width="2" rx="12"/>
+    <rect x="461" y="397" width="278" height="43" fill="rgba(24,24,24,0.78)" rx="11"/>
+    <rect x="461" y="418" width="278" height="22" fill="rgba(24,24,24,0.78)"/>
+    <line x1="461" y1="440" x2="739" y2="440" stroke="#2d2d2d"/>
+    
+  <circle cx="476" cy="418" r="4" fill="#4e8cff">
+    <animate attributeName="opacity" values="1;.35;1" dur="2.4s" begin="0s" repeatCount="indefinite"/>
+  </circle>
+    <text x="490" y="423" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" fill="#ececec" font-weight="600" letter-spacing="-.01em">october bus</text>
+    <text x="476" y="468" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="11" fill="#9a9a9a">shared state · direct messages</text>
   </g>
 
   
-  <line x1="40" y1="930" x2="1160" y2="930" stroke="#332e28"/>
-  <text x="40" y="956" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#8b8175" letter-spacing=".1em">17 harnesses · one workspace</text>
-  <text x="1160" y="956" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#e0662a" text-anchor="end" letter-spacing=".1em">october.dev</text>
+  <rect x="0" y="0" width="1200" height="40" fill="rgba(24,24,24,0.71)"/>
+  <line x1="0" y1="40" x2="1200" y2="40" stroke="#2d2d2d"/>
+  <circle cx="16" cy="20" r="6" fill="#ff5f57"/>
+  <circle cx="36" cy="20" r="6" fill="#febc2e"/>
+  <circle cx="56" cy="20" r="6" fill="#28c840"/>
+  <rect x="86" y="12" width="16" height="16" fill="#A855F7" rx="3"/>
+  <text x="110" y="25" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#ececec" font-weight="500" letter-spacing=".02em">October</text>
+  <line x1="176" y1="10" x2="176" y2="30" stroke="#2d2d2d"/>
+  <text x="190" y="25" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#ececec" font-weight="500">operation.profile</text>
+  <rect x="932" y="11" width="92" height="18" fill="rgba(78,140,255,0.12)" stroke="rgba(78,140,255,0.4)" rx="9"/>
+  
+  <circle cx="944" cy="20" r="3" fill="#4e8cff">
+    <animate attributeName="opacity" values="1;.35;1" dur="2.4s" begin="0s" repeatCount="indefinite"/>
+  </circle>
+  <text x="954" y="24" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#4e8cff">2 agents</text>
+  <rect x="1032" y="11" width="100" height="18" fill="rgba(245,158,11,0.14)" stroke="rgba(245,158,11,0.4)" rx="9"/>
+  <text x="1044" y="24" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#f59e0b">1 needs you</text>
+  
+  <rect x="488" y="548" width="224" height="50" fill="rgba(24,24,24,0.71)" stroke="#2d2d2d" rx="18"/>
+  <rect x="495" y="554" width="34" height="34" fill="#D97757" rx="9" opacity="0.9"/><rect x="537" y="554" width="34" height="34" fill="#10A37F" rx="9" opacity="0.9"/><rect x="579" y="554" width="34" height="34" fill="#A855F7" rx="9" opacity="0.9"/><rect x="621" y="554" width="34" height="34" fill="#3b82f6" rx="9" opacity="0.9"/><rect x="663" y="554" width="34" height="34" fill="#f59e0b" rx="9" opacity="0.9"/>
 </svg>

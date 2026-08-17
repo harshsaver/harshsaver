@@ -1,79 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 470" width="1200" height="470" role="img" aria-label="Agent card for Harsh Savergaonkar — connect via npx -y @harshsaver/mcp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="1200" height="340" role="img" aria-label="Agent card — Harsh Savergaonkar">
 
   
   <defs>
-    <filter id="grain-card-light" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.045 0"/>
-    </filter>
-    <radialGradient id="glow-card-light" cx="12%" cy="8%" r="55%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
+    <pattern id="dots-card-light" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#cfd2d8"/>
+    </pattern>
+    
+  <marker id="ar-card-light" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#3b82f6"/>
+  </marker>
   </defs>
-  
-  <rect x="0" y="0" width="1200" height="470" fill="#f3f0e8"/>
-  <rect x="0" y="0" width="1200" height="470" fill="url(#glow-card-light)"/>
-  <rect x="0" y="0" width="1200" height="470" filter="url(#grain-card-light)" opacity="0.9"/>
-  
-  <circle cx="44" cy="52" r="4" fill="#367951">
-     <animate attributeName="opacity" values="1;.3;1" dur="2.4s"
-              begin="0s" repeatCount="indefinite"/>
-   </circle>
-  <text x="62" y="57" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#554e45" letter-spacing=".06em">agent.card</text>
-  <text x="1160" y="57" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#746c61" text-anchor="end" letter-spacing=".06em">A2A v1.0</text>
-  <line x1="40" y1="82" x2="1160" y2="82" stroke="#dcd4c5"/>
-  
-  <rect x="40" y="108" width="24" height="24" fill="none" stroke="#bfb5a2" rx="4"/>
-  <text x="52" y="125" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#554e45" text-anchor="middle" letter-spacing=".04em">IV</text>
-  <text x="76" y="125" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#554e45" letter-spacing=".13em">A PEER YOU CAN CONNECT TO</text>
-
+  <rect x="0" y="0" width="1200" height="340" fill="#ecedf0"/>
+  <rect x="0" y="0" width="1200" height="340" fill="url(#dots-card-light)"/>
   <g>
-    <text x="40" y="196" font-family="Libre Caslon Text, Georgia, 'Times New Roman', serif" font-size="40" fill="#181511">Harsh Savergaonkar</text>
-    <text x="40" y="232" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#b8460d" letter-spacing=".06em">@harshsaver</text>
-    <line x1="40" y1="254" x2="600" y2="254" stroke="#dcd4c5"/>
-    <text x="40" y="284" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" fill="#746c61" letter-spacing=".14em">ROLE</text>
-    <text x="150" y="284" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#181511">operator · human peer</text>
-    <text x="40" y="312" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" fill="#746c61" letter-spacing=".14em">HARNESS</text>
-    <text x="150" y="312" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#181511">wetware · India</text>
-    <text x="40" y="340" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" fill="#746c61" letter-spacing=".14em">ORG</text>
-    <text x="150" y="340" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#181511">Wega Labs · October</text>
-    <text x="40" y="368" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" fill="#746c61" letter-spacing=".14em">CONNECT</text>
-    <text x="150" y="368" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#b8460d">npx -y @harshsaver/mcp</text>
+    <rect x="24" y="24" width="1152" height="292" fill="rgba(13,13,13,0.92)" stroke="#dedede" stroke-width="2" rx="12"/>
+    <rect x="25" y="25" width="1150" height="43" fill="rgba(255,255,255,0.85)" rx="11"/>
+    <rect x="25" y="46" width="1150" height="22" fill="rgba(255,255,255,0.85)"/>
+    <line x1="25" y1="68" x2="1175" y2="68" stroke="#dedede"/>
+
+    
+  <circle cx="40" cy="46" r="4" fill="#22c55e">
+    <animate attributeName="opacity" values="1;.35;1" dur="2.4s" begin="0s" repeatCount="indefinite"/>
+  </circle>
+    <rect x="51" y="37" width="18" height="18" fill="#A855F7" rx="4"/>
+    <text x="60" y="50" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#0a0a0a" font-weight="700" text-anchor="middle">H</text>
+    <text x="77" y="51" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="15" fill="#1a1a1a" font-weight="600" letter-spacing="-.01em">Harsh Savergaonkar</text>
+    <text x="256" y="51" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#A855F7" font-weight="500">· operator · human peer</text>
+    <text x="1160" y="51" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="10" fill="#6e6e6e" font-weight="500" text-anchor="end">A2A v1.0</text>
+
+    <text x="48" y="108" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="13" fill="#4ade80">$ npx -y @harshsaver/mcp</text>
+    <text x="48" y="140" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#e5e7eb">get_projects</text>
+      <text x="234" y="140" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="11" fill="#9a9a9a">what is shipped, what is live, what is dead</text>
+    <text x="48" y="170" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#e5e7eb">get_shiplog</text>
+      <text x="234" y="170" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="11" fill="#9a9a9a">releases and commits across every repo</text>
+    <text x="48" y="200" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#e5e7eb">get_ledger</text>
+      <text x="234" y="200" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="11" fill="#9a9a9a">operator bits emitted, selections, window</text>
+    <text x="48" y="230" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#e5e7eb">ask_harsh</text>
+      <text x="234" y="230" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="11" fill="#9a9a9a">queue a question — answered as a public transcript</text>
+    <text x="48" y="260" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="12" fill="#e5e7eb">request_intro</text>
+      <text x="234" y="260" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="11" fill="#9a9a9a">open a scoped introduction request</text>
+
+    <line x1="25" y1="272" x2="1175" y2="272" stroke="#dedede"/>
+    <text x="48" y="298" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="10" fill="#9a9a9a">https://harshsaver.github.io/.well-known/agent-card.json</text>
+    <text x="1152" y="298" font-family="'SF Mono', 'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace" font-size="10" fill="#60a5fa" text-anchor="end">october.dev</text>
   </g>
-
-  <line x1="630" y1="150" x2="630" y2="380" stroke="#dcd4c5"/>
-  <g>
-    <text x="660" y="196" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" fill="#746c61" letter-spacing=".14em">SKILLS</text>
-    <circle cx="1156" cy="192" r="4" fill="#367951">
-     <animate attributeName="opacity" values="1;.3;1" dur="2.4s"
-              begin="0s" repeatCount="indefinite"/>
-   </circle>
-    <text x="1140" y="196" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" fill="#367951" text-anchor="end" letter-spacing=".1em">resolvable</text>
-  </g>
-  <g>
-      <text x="660" y="232" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d">▸</text>
-      <text x="682" y="232" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#181511">get_projects</text>
-      <text x="1160" y="232" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#746c61" text-anchor="end">what is shipped, what is live, what is dead</text>
-    </g><g>
-      <text x="660" y="264" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d">▸</text>
-      <text x="682" y="264" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#181511">get_shiplog</text>
-      <text x="1160" y="264" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#746c61" text-anchor="end">releases and commits across every repo</text>
-    </g><g>
-      <text x="660" y="296" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d">▸</text>
-      <text x="682" y="296" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#181511">get_ledger</text>
-      <text x="1160" y="296" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#746c61" text-anchor="end">operator bits emitted, selections, window</text>
-    </g><g>
-      <text x="660" y="328" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d">▸</text>
-      <text x="682" y="328" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#181511">ask_harsh</text>
-      <text x="1160" y="328" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#746c61" text-anchor="end">queue a question — answered as a public transcript</text>
-    </g><g>
-      <text x="660" y="360" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#b8460d">▸</text>
-      <text x="682" y="360" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#181511">request_intro</text>
-      <text x="1160" y="360" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#746c61" text-anchor="end">open a scoped introduction request</text>
-    </g>
-
-  <g><rect x="40" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="49" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="58" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="67" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="76" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="85" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="94" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="103" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="112" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="121" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="130" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="139" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="148" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="157" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="166" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="175" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="184" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="193" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="202" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="211" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="220" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="229" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="238" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="247" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="256" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="265" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="274" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="283" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="292" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="301" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="310" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="319" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="328" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="337" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="346" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="355" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="364" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="373" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="382" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="391" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="400" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="409" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="418" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="427" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="436" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="445" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="454" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="463" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="472" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="481" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="490" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="499" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="508" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="517" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="526" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="535" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="544" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="553" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="562" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="571" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="580" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="589" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="598" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="607" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="616" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="625" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="634" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="643" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="652" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="661" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="670" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="679" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="688" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="697" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="706" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="715" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="724" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="733" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="742" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="751" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="760" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="769" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="778" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="787" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="796" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="805" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="814" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="823" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="832" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="841" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="850" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="859" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="868" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="877" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="886" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="895" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="904" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="913" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="922" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="931" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="940" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="949" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="958" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="967" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="976" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="985" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="994" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="1003" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="1012" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="1021" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="1030" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="1039" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="1048" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="1057" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="1066" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="1075" y="404" width="3" height="20" fill="#181511" opacity="0.55"/><rect x="1084" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="1093" y="404" width="2" height="20" fill="#181511" opacity="0.55"/><rect x="1102" y="404" width="1" height="20" fill="#181511" opacity="0.55"/><rect x="1111" y="404" width="3" height="20" fill="#181511" opacity="0.55"/></g>
-  <text x="40" y="448" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" fill="#746c61" letter-spacing=".06em">https://harshsaver.github.io/.well-known/agent-card.json</text>
-  <text x="1160" y="448" font-family="'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" fill="#b8460d" text-anchor="end" letter-spacing=".1em">october.dev</text>
 </svg>
