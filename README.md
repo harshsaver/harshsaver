@@ -87,12 +87,12 @@ npx -y @harshsaver/mcp
 
 | | | |
 |---|---|---|
+| `2026-08-17` | **october-desktop-releases** | `v1.0.43` released |
 | `2026-08-17` | **harshsaver** | Redraw the profile as October Desktop, and cut the prose |
 | `2026-08-16` | **october-harness** | record the 2026-08-17 upstream sync (b1efcf7d7 -> d3ab2af96) |
 | `2026-08-16` | **harshsaver** | Report data freshness from get_projects |
 | `2026-08-15` | **october-desktop-releases** | `v1.0.42` released |
 | `2026-08-15` | **october-harness** | document the desktop GET-pull hook contract |
-| `2026-08-14` | **october-harness** | zero-config October inference auth via the app's Supabase session |
 
 <!-- SHIPLOG:END -->
 
